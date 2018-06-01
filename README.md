@@ -224,13 +224,7 @@ $convertToPdf = $client->pdf4me()->convertToPdf([
 ],
 "convertToPdfAction"=> [
   "pdfConformance"=> "pdf17",
-  "conversionMode"=> "fast",
-  "customProperties"=> [
-
-      "key"=> "1233",
-      "value"=> "examp1"
-
-  ]
+  "conversionMode"=> "fast"
 ]
 
     ]);
