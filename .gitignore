@@ -1,2 +1,4 @@
 vendor
 phpunit.xml
+/.vs/config/applicationhost.config
+/.vs/slnx.sqlite
