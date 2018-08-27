@@ -16,7 +16,8 @@ trait PdfDataContractValidate {
      */
     protected function checkValidationSchemaData($params,$route, $req_type, $currentSchema = null) {
          $schemaData = $this->setDataContractSchema($params, $route, $req_type)[$route];
-        if (is_array($schemaData)) {
+         
+         if (is_array($schemaData)) {
             foreach ($schemaData as $keyschema => $schemavalue) {
                 if (array_key_exists($keyschema,$params)) {
                     $this->getsubContracts($schemavalue, $params, $keyschema);
@@ -31,6 +32,7 @@ trait PdfDataContractValidate {
     }
     
     public function hasKey($indexkey, $keyschema, $subkeyparam, $params, $superIndex = null, $primarysuperIndex = null) {
+        
         if($primarysuperIndex!='') {
             return isset($params[$primarysuperIndex][$superIndex][$indexkey][$keyschema][$subkeyparam]) ? $params[$primarysuperIndex][$superIndex][$indexkey][$keyschema][$subkeyparam] : null;
         }
@@ -45,7 +47,23 @@ trait PdfDataContractValidate {
             return isset($params[$indexkey][$keyschema]) ? $params[$indexkey][$keyschema] : 4;
         }
         elseif ($indexkey == '') {
+            
+            if(!(isset($params[$keyschema][$subkeyparam]))&&(isset($params[$keyschema]))&&(is_array($params[$keyschema]))) {
              
+                foreach($params[$keyschema] as $keyparam=>$paramvalues) {
+                   
+                    if(isset($paramvalues[$subkeyparam])) {
+                       
+                        return $paramvalues[$subkeyparam];
+                    }
+                    else {
+                       
+                        return ($subkeyparam===$keyparam)?$paramvalues:null;
+                    }
+                    
+                }
+            }
+            else
              return isset($params[$keyschema][$subkeyparam]) ? $params[$keyschema][$subkeyparam] : null;
         }
         else {
@@ -55,8 +73,9 @@ trait PdfDataContractValidate {
     }
 
     public function setRequiredValidate($subparamvalue,$keyschema) {
+ 
         if ((isset($subparamvalue['required'])&&($subparamvalue['required'] == 1)) || ((isset($keyschema['required'])) && $keyschema['required'] == 1)) {
-            throw new CustomException($keyschema . ' field are required');
+            throw new CustomException('The '.$keyschema . ' cannot be None');
         }
     }
     
@@ -95,7 +114,6 @@ trait PdfDataContractValidate {
                         $this->getsubContracts($subparamvalue, $params, $subkeyparam, $keyschema);
                         
                     } else {
-                        
                         $this->setRequiredValidate($subparamvalue,$keyschema);
                         
                     }
@@ -107,6 +125,7 @@ trait PdfDataContractValidate {
      */
     public function checkIfRequired($isParamExit,$schemavalue,  $keyschema) {
         if ($isParamExit == null) {
+            
                     $this->setRequiredValidate($schemavalue,$keyschema);
                     }
     }
@@ -115,10 +134,10 @@ trait PdfDataContractValidate {
      * get the schema with reference
      */
     public function getsubContracts($schemavalue, &$params, $keyschema, $indexkey = null, $superIndex = '',$primarysuperIndex='') {
-         
+        
         if (is_array($schemavalue)) {
             foreach ($schemavalue as $subkeyparam => $subparamvalue) {
-          
+                
                 if (is_array($subparamvalue) && (!isset($subparamvalue['parameters']))) {
                  
                 $this->getRefMultiSchema($subparamvalue, $params, $subkeyparam, $keyschema,$indexkey,$superIndex,$primarysuperIndex);    
@@ -126,7 +145,7 @@ trait PdfDataContractValidate {
                 } 
                 elseif (($subkeyparam=='required') && ($subparamvalue == 1)) {
                     $isParamExit = $this->hasKey($indexkey, $keyschema, $subkeyparam, $params, $superIndex,$primarysuperIndex);
-                    $this->checkIfRequired($isParamExit,$schemavalue,  $schemavalue);
+                    $this->checkIfRequired($isParamExit,$schemavalue,  $keyschema);
                     
                     
                     }
@@ -134,20 +153,21 @@ trait PdfDataContractValidate {
                
                     $isParamExit = $this->hasKey($indexkey, $keyschema, $subkeyparam, $params, $superIndex,$primarysuperIndex);
                     
-                    
+                   
                     if (isset($subparamvalue['required'])&&($isParamExit == '')) {
                          
-                            throw new CustomException($subkeyparam . ' is required');
+                            throw new CustomException('The '.$keyschema.'.'.$subkeyparam . ' cannot be None');
                         }
                        
                     foreach ($subparamvalue['parameters'] as $keyfield => $fieldvalue) {
                        
                         if (($keyfield == 'required')&&($isParamExit == '')) {
-                            throw new CustomException($fieldvalue . ' is required');
+                            throw new CustomException('The '.$fieldvalue . ' cannot be None');
                         }
                         
                         if ($isParamExit != '') {
-                            $this->getParamaExceptions($keyfield,$fieldvalue,$isParamExit,$subkeyparam);
+                           
+                            $this->getParamaExceptions($keyfield,$fieldvalue,$isParamExit,$subkeyparam,$keyschema);
                             
 
                         }
@@ -157,39 +177,44 @@ trait PdfDataContractValidate {
         }
     }
     
-    public function getParamaExceptions($keyfield,$fieldvalue,$isParamExit,$subkeyparam) {
+    public function getParamaExceptions($keyfield,$fieldvalue,$isParamExit,$subkeyparam,$keyschema=null) {
+
         switch ($keyfield) {
                                 case 'type':
                                    
                                     if(($fieldvalue == 'integer')&&(!is_numeric($isParamExit))) {
-                                        throw new CustomException($subkeyparam . ' only allows integer values');
+                                        throw new CustomException($keyschema.'.'.$subkeyparam . ' only allows integer values');
                                     }
                                     if(($fieldvalue == 'string')&&(!is_string($isParamExit))) {
-                                        throw new CustomException($subkeyparam . ' only allows string values');
+                                        throw new CustomException($keyschema.'.'.$subkeyparam . ' only allows string values');
                                     }                                  
                                     if(($fieldvalue == 'upload')&&(!file_exists($isParamExit))) {
                                         throw new CustomException('File ' . $isParamExit . ' could not be found');
                                     }
                                    break;
                                 case 'enum':
-                                    
+                                  
                                     if (!in_array(strtolower($isParamExit), $fieldvalue)) {
-                                    throw new CustomException($subkeyparam . ' only allows these values'.json_encode($fieldvalue));
+                                    throw new CustomException($keyschema.'.'.$subkeyparam . ' only allows these values'.json_encode($fieldvalue));
                                 }
                                 break;
                                 case 'items':
+                                    
+                                    if(count($isParamExit)==0) {
+                                        throw new CustomException($keyschema.'.'.$subkeyparam . ' cannot be empty'); 
+                                    }
                                     if(($fieldvalue['type'] == 'integer')&& (!array_map("is_numeric", $isParamExit))) {
-                                       throw new CustomException($subkeyparam . ' only allows integer values'); 
+                                       throw new CustomException($keyschema.'.'.$subkeyparam . ' only allows integer values'); 
                                     }
                                     if(($fieldvalue['type'] == 'string')&&(!array_map("is_string", $isParamExit))) {
-                                       throw new CustomException($subkeyparam . ' only allows string values'); 
+                                       throw new CustomException($keyschema.'.'.$subkeyparam . ' only allows string values'); 
                                     }
 //                                    if(($fieldvalue == 'boolean')&&($isParamExit!='true'||$isParamExit!='false')) {
 //                                        throw new CustomException($subkeyparam . ' only allows boolean values');
 //                                    }
                                     
                                     if((isset($fieldvalue['enum']))&& !in_array(implode(',', array_map("strtolower", $isParamExit)), array_map("strtolower",$fieldvalue['enum']))) {
-                                        throw new CustomException($subkeyparam . ' only allows these values'.json_encode(array_map("strtolower",$fieldvalue['enum'])));
+                                        throw new CustomException($keyschema.'.'.$subkeyparam . ' only allows these values'.json_encode(array_map("strtolower",$fieldvalue['enum'])));
                                     }
                                 break;    
                             }

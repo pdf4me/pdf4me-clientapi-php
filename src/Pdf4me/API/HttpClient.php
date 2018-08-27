@@ -72,8 +72,8 @@ class HttpClient
      */
 
     public function __construct(
-        $scheme = "https",
-        $hostname = "api-dev.Pdf4me.com",
+        $scheme = "",
+        $hostname = "",
         $guzzle = null
     ) {
         if (is_null($guzzle)) {
@@ -86,9 +86,9 @@ class HttpClient
             $this->guzzle = $guzzle;
         }
 
-        $this->hostname  = $hostname;
-        $this->scheme    = $scheme;
-        $this->apiUrl    = "$scheme://$hostname/";
+        $this->hostname  = ($hostname=='')?"api-dev.Pdf4me.com":$hostname;
+        $this->scheme    = ($scheme=='')?"https":$scheme;
+        $this->apiUrl    = "$this->scheme://$this->hostname/";
         $this->debug      = new Debug();
     }
 
@@ -128,6 +128,7 @@ class HttpClient
      * 
      */
     public function getServerAuth() {
+        
         $response = $this->guzzle->request('POST', $this->authurl, [
     'form_params' => [
         'resource' => $this->headers['auth'][0],
@@ -162,8 +163,11 @@ class HttpClient
      * @internal param array $headers
      *
      */
-    public function setAuthHeader($clientId, $secretkey)
+    public function setAuthHeader($clientId, $secretkey, $authurl = null)
     {
+        if($authurl!=null) { 
+            $this->authurl = $authurl; 
+        }
         $this->headers['auth']= [$clientId,$secretkey];
         $this->getHeaders();
         return $this;
@@ -289,8 +293,10 @@ class HttpClient
             $endpoint,
             $extraOptions
         );
+        
+
         // to check whether docLogLevel= 3
-        if((!empty($response))&&((isset($response->document))&&($response->document->docLogs))&&((isset($response->documents))&&($response->documents->docLogs))) {
+        if((!empty($response))&&((isset($response->document))&&(isset($response->document->docLogs)))||((isset($response->documents))&&(isset($response->documents->docLogs)))) {
             $this->validateResDocData($response->document->docLogs);
         }
 
