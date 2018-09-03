@@ -1,6 +1,6 @@
 {
   "name": "pdf4me/pdf4me_api_client_php",
-  "description": "Api wrapper ynoox",
+  "description": "Api wrapper pdf4me",
   "homepage": "https://github.com/pdf4me/pdf4me-clientapi-php",
   "minimum-stability": "dev",
   "require": {
