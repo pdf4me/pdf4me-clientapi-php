@@ -2,7 +2,7 @@
 
 namespace Pdf4me\API\Resources\Core;
 
-use Pdf4me\API\Exceptions\MissingParametersExceptionCustomException;
+use Pdf4me\API\Exceptions\MissingParametersExceptionPdf4meException;
 use Pdf4me\API\Exceptions\ResponseException;
 use Pdf4me\API\Http;
 use Pdf4me\API\Resources\ResourceAbstract;
@@ -111,9 +111,12 @@ class Pdf4me extends ResourceAbstract {
       $route = $this->getRoute(__FUNCTION__, $params);
 
         $this->checkValidationSchemaGetData($params,$route,'post','splitByPageNr');
-        return $this->client->uploadMultipart(
+        $response = $this->client->uploadMultipart(
                         $route, $params
-        );    
+        );
+        // split response into seperate array
+        $splitResponse = serialize(explode(",",$response));
+        return unserialize($splitResponse);
     }
     
     /**
