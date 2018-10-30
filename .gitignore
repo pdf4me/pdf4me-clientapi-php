@@ -3,3 +3,4 @@ phpunit.xml
 /.vs/config/applicationhost.config
 /.vs/slnx.sqlite
 *.suo
+/.vs/VSWorkspaceState.json
