@@ -15,6 +15,7 @@
 	    <env name="AccessType" value=""/><!-- change value of AccessType to 'token', if using OAUTH_TOKEN for Authentication -->
         <env name="ApiSchema" value=""/>
         <env name="ApiHost" value=""/>
+        <env name="Token" value=""/>
 
     </php>
 

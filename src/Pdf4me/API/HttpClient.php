@@ -71,11 +71,14 @@ class HttpClient
      * @param \GuzzleHttp\Client $guzzle
      */
 
-    public function __construct(
-        $scheme = "",
+    public function __construct($token='',
         $hostname = "",
         $guzzle = null
     ) {
+        if ($token=='') {
+            throw new Pdf4meException('Pdf4me client should have a token ');
+        }
+        $this->setToken($token);
         if (is_null($guzzle)) {
             $handler = HandlerStack::create();
             $handler->push(new RetryHandler(['retry_if' => function ($retries, $request, $response, $e) {
@@ -86,10 +89,10 @@ class HttpClient
             $this->guzzle = $guzzle;
         }
 
-        $this->hostname  = ($hostname=='')?"api-dev.Pdf4me.com":$hostname;
-        $this->scheme    = ($scheme=='')?"https":$scheme;
-        $this->apiUrl    = "$this->scheme://$this->hostname/";
+        $this->hostname  = ($hostname=='')?"https://api-dev.pdf4me.com":$hostname;
+        $this->apiUrl    = "$this->hostname/"; 
         $this->debug      = new Debug();
+     
     }
 
     /**
@@ -163,15 +166,15 @@ class HttpClient
      * @internal param array $headers
      *
      */
-    public function setAuthHeader($clientId, $secretkey, $authurl = null)
-    {
-        if($authurl!=null) { 
-            $this->authurl = $authurl; 
-        }
-        $this->headers['auth']= [$clientId,$secretkey];
-        $this->getHeaders();
-        return $this;
-    }
+//    public function setAuthHeader($clientId, $secretkey, $authurl = null)
+//    {
+//        if($authurl!=null) { 
+//            $this->authurl = $authurl; 
+//        }
+//        $this->headers['auth']= [$clientId,$secretkey];
+//        $this->getHeaders();
+//        return $this;
+//    }
     
 /**
      * @param string $value The value to set in the header
@@ -410,5 +413,41 @@ class HttpClient
                 
             }
         return null;
+    }
+    
+    /**
+     * @param string $filename
+     */
+    public function downloadResDataBase64($baseEncode, $filename) {
+        $decoded = base64_decode($baseEncode);
+        $file = $filename;
+        file_put_contents($file, $decoded);
+        $this->getFileDownload($file);
+    }
+    
+     /**
+     * @param string $filename
+     */
+    public function downloadResStream($baseData, $filename) {
+        $file = $filename;
+        file_put_contents($file, $baseData);
+        $this->getFileDownload($file);
+    }
+    
+    /**
+     * @param string $file
+     */
+    public function getFileDownload($file) {
+        if (file_exists($file)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="'.basename($file).'"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            readfile($file);
+            exit;
+        }
     }
 }
