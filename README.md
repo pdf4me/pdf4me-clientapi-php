@@ -25,9 +25,9 @@ To install run `composer require pdf4me/pdf4me_api_client_php:"dev-master"`
 
 ## Getting Started
 
-To get started get an Api-Key and Password by dropping us an email (support-dev@pdf4me.com).
+To get started get a Token by dropping us an email (support-dev@pdf4me.com).
 
-The Api-Key/Password is required to Authenticate. The Pdf4me Client Api provides you already with the 
+The Token is required to Authenticate. The Pdf4me Client Api provides you already with the 
 necessary implementation. You need only to get an instance for the Pdf4meClient as shown in the sample below.
 
 ``` php
