@@ -5,3 +5,5 @@ phpunit.xml
 *.suo
 /.vs/VSWorkspaceState.json
 /.idea
+/.vs/slnx.sqlite-journal
+/.vs
