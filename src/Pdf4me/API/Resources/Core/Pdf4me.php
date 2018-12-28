@@ -119,7 +119,7 @@ class Pdf4me extends ResourceAbstract {
             $route, $params
         );
         // split response into seperate array
-        $splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $str)))));
+        $splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
         return unserialize($splitResponse);
     }
     
