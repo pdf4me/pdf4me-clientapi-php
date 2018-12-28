@@ -2,7 +2,7 @@
 	"name" : "pdf4me/pdf4me_api_client_php",
 	"description" : "Api wrapper pdf4me",
 	"homepage" : "https://github.com/pdf4me/pdf4me-clientapi-php",
-	"minimum-stability" : "dev",
+	"minimum-stability" : "=0.1-stable",
 	"require" : {
 		"php" : ">=5.5.0",
 		"guzzlehttp/guzzle" : "^6.0",
