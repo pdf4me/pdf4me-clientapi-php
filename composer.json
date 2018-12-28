@@ -1,25 +1,29 @@
 {
-	"name" : "pdf4me/pdf4me_api_client_php",
-	"description" : "Api wrapper pdf4me",
-	"homepage" : "https://github.com/pdf4me/pdf4me-clientapi-php",
-	"minimum-stability" : "dev",
-	"require" : {
-		"php" : ">=5.5.0",
-		"guzzlehttp/guzzle" : "^6.0",
-		"mmucklo/inflect" : "0.3.*"
-	},
-	"require-dev" : {
-		"phpunit/phpunit" : "4.5.*",
-		"squizlabs/php_codesniffer" : "2.*",
-		"phpmd/phpmd" : "@stable",
-		"fzaninotto/faker" : ">=1.5.0",
-		"psy/psysh" : "@stable"
-	},
+  "name": "pdf4me/pdf4me_api_client_php",
+  "description": "Api wrapper pdf4me",
+  "homepage": "https://github.com/pdf4me/pdf4me-clientapi-php",
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.5.0",
+    "guzzlehttp/guzzle": "^6.0",
+    "mmucklo/inflect": "0.3.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.5.*",
+    "squizlabs/php_codesniffer": "2.*",
+    "phpmd/phpmd": "@stable",
+    "fzaninotto/faker": ">=1.5.0",
+    "psy/psysh": "@stable"
+  },
   "autoload": {
     "psr-0": {
       "Pdf4me\\API\\": "src/"
     }
   },
-  "version": "0.1",
-	"license" : "MIT"
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1-dev"
+    }
+  },
+  "license": "MIT"
 }
