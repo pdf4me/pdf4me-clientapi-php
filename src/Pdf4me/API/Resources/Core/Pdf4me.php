@@ -45,35 +45,204 @@ class Pdf4me extends ResourceAbstract {
         parent::setUpRoutes();
 
         $this->setRoutes([
-            'jobConfig' => 'job/jobConfigs',
-            'optimize' => 'Optimize/Optimize',
-            'pdfA'=>'PdfA/PdfA',
-            'merge'=>'Merge/Merge',
-            'createImages'=> 'Image/CreateImages',
-            'split'=>'Split/Split',
-            'stamp'=>'Stamp/Stamp',
-            'getDocuments'=>'Document/GetDocuments',
-            'convertToPdf'=>'Convert/ConvertToPdf',
-            'getContentDocument'=>'Document/GetDocument',
-            'dropDocument'=>'Document/DropDocument',
-            'produceDocuments'=>'Document/ProduceDocuments',
-            'extractPages' => 'Extract/ExtractPages',
-            'extract' => 'Extract/Extract',
-            'createThumbnail'=>'Image/CreateThumbnail',
-            'createArchiveJobConfig'=>'Job/CreateArchiveJobConfig',
-            'runJob'=>'Job/RunJob',
-            'saveJobConfig'=>'Job/SaveJobConfig',
-            'manageVersion'=>'Management/Version',
-            'manageApiUsage'=>'Management/ApiUsage',
-            'merge2Pdfs'=>'Merge/Merge2Pdfs',
-            'recognizeDocument'=>'Ocr/RecognizeDocument',
-            'optimizeByProfile'=>'Optimize/OptimizeByProfile',
-            'createPdfA' => 'PdfA/CreatePdfA',
-            'splitByPageNr' => 'Split/SplitByPageNr',
-            'textStamp'=>'Stamp/TextStamp',
-            'convertFileToPdf'=>'Convert/ConvertFileToPdf'
+                        'convertFileToPdf' =>'Convert/ConvertFileToPdf',
+                        'convertToPdf'=>'Convert/ConvertToPdf',
+                        'createThumbnail'=>'Image/CreateThumbnail',
+                        'createImages'=> 'Image/CreateImages',
+                        'createPdfA' => 'PdfA/CreatePdfA',
+                        'pdfA'=>'PdfA/PdfA',
+                        'extractPages' => 'Extract/ExtractPages',
+                        'extract' => 'Extract/Extract',
+                        'merge2Pdfs'=>'Merge/Merge2Pdfs',
+                        'merge'=>'Merge/Merge',
+                        'optimizeByProfile'=>'Optimize/OptimizeByProfile',
+                        'optimize' => 'Optimize/Optimize',
+                        'splitByPageNr' => 'Split/SplitByPageNr',
+                        'split'=>'Split/Split',
+                        'textStamp'=>'Stamp/TextStamp',
+                        'stamp'=>'Stamp/Stamp',
+                        'recognizeDocument'=>'Ocr/RecognizeDocument',
+                        'rotatePage'=>'PdfA/RotatePage',
+                        'rotateDocument'=>'PdfA/RotateDocument',
+                        'rotate'=>'PdfA/Rotate',
+                        'protectDocument'=>'PdfA/ProtectDocument',
+                        'unlockDocument'=>'PdfA/UnlockDocument',
+                        'protect'=>'PdfA/Protect',
+                        'validateDocument'=>'PdfA/ValidateDocument',
+                        'validate'=>'PdfA/Validate',
+                        'repairDocument'=>'PdfA/RepairDocument',
+                        'repair'=>'PdfA/Repair',
+
+                        'createArchiveJobConfig'=>'Job/CreateArchiveJobConfig',
+                        'jobConfig' => 'job/jobConfigs',
+                        'runJob'=>'Job/RunJob',
+                        'saveJobConfig'=>'Job/SaveJobConfig',
+                        'manageApiUsage'=>'Management/ApiUsage',
+                        'manageVersion'=>'Management/Version',
+
+                        'dropDocument'=>'Document/DropDocument',
+                        'getContentDocument'=>'Document/GetDocument',
+                        'getDocuments'=>'Document/GetDocuments',
+                        'produceDocuments'=>'Document/ProduceDocuments',
+
+                       
         ]);
     }
+
+       
+    /**
+     * for protect api
+     * @param array
+     * 
+     * return @array
+     */
+    public function rotate(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','rotate');
+        return $this->client->post(
+                        $route, $params
+        );   
+    }
+      
+    /**
+    * for rotateDocument
+    * @param array
+    * 
+    * return @array
+    */
+    public function rotateDocument(array $params) {
+    $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','rotateDocument');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
+    }
+
+     /**
+    * for rotatePage
+    * @param array
+    * 
+    * return @array
+    */
+    public function rotatePage(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+      
+        $this->checkValidationSchemaGetData($params,$route,'post','rotatePage');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
+    }
+
+    
+    /**
+     * for protect api
+     * @param array
+     * 
+     * return @array
+     */
+    public function protect(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','protect');
+        return $this->client->post(
+                        $route, $params
+        );   
+    }
+      
+    /**
+    * for protectDocument
+    * @param array
+    * 
+    * return @array
+    */
+    public function protectDocument(array $params) {
+    $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','protectDocument');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
+    }
+
+     /**
+    * for unlockDocument
+    * @param array
+    * 
+    * return @array
+    */
+    public function unlockDocument(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+      
+        $this->checkValidationSchemaGetData($params,$route,'post','unlockDocument');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
+    }
+
+        
+    /**
+     * for protect api
+     * @param array
+     * 
+     * return @array
+     */
+    public function validate(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','validate');
+        return $this->client->post(
+                        $route, $params
+        );   
+    }
+      
+    /**
+    * for protectDocument
+    * @param array
+    * 
+    * return @array
+    */
+    public function validateDocument(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','validateDocument');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
+    }
+
+    /**
+     * for repair api
+     * @param array
+     * 
+     * return @array
+     */
+    public function repair(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','repair');
+        return $this->client->post(
+                        $route, $params
+        );   
+    }
+      
+    /**
+    * for repairDocument
+    * @param array
+    * 
+    * return @array
+    */
+    public function repairDocument(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','repairDocument');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
+    }
+
+
     
     /**
      * for convertFileToPdf api
@@ -81,8 +250,9 @@ class Pdf4me extends ResourceAbstract {
      * return @array
      */
     public function convertFileToPdf(array $params) {
-      $route = $this->getRoute(__FUNCTION__, $params);
-         $this->checkValidationSchemaGetData($params,$route,'post','convertFileToPdf');
+        $route = $this->getRoute(__FUNCTION__, $params);
+
+        $this->checkValidationSchemaGetData($params,$route,'post','convertFileToPdf');
         return $this->client->uploadMultipart(
                         $route, $params
         );   
@@ -129,7 +299,7 @@ class Pdf4me extends ResourceAbstract {
      * return @array
      */
     public function createPdfA(array $params) {
-      $route = $this->getRoute(__FUNCTION__, $params);
+        $route = $this->getRoute(__FUNCTION__, $params);
 
         $this->checkValidationSchemaGetData($params,$route,'post','createPdfA');
         return $this->client->uploadMultipart(
@@ -144,7 +314,7 @@ class Pdf4me extends ResourceAbstract {
      * return @array
      */
     public function optimizeByProfile(array $params) {
-      $route = $this->getRoute(__FUNCTION__, $params);
+        $route = $this->getRoute(__FUNCTION__, $params);
 
         $this->checkValidationSchemaGetData($params,$route,'post','optimizeByProfile');
         return $this->client->uploadMultipart(
