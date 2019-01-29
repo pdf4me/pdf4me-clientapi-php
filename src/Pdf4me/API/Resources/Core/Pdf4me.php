@@ -210,8 +210,8 @@ class Pdf4me extends ResourceAbstract {
         $res = $this->client->uploadMultipart(
                         $route, $params
         ); 
-
-        return unserialize($res);
+        $res_1 = serialize($res);
+        return unserialize($res_1);
     }
 
     /**
