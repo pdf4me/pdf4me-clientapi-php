@@ -52,6 +52,7 @@ class Http
         $headers = array_merge([
             'Accept'       => 'application/json',
             'Content-Type' => $options['contentType'],
+            'User-Agent'   => 'pdf4me-php/0.1.4'
         ], $client->getHeaders());
         $request = new Request(
             $options['method'],
