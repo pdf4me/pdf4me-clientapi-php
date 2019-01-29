@@ -14,7 +14,7 @@ Feature | Description
 **Stamp** | Stamp your document with text or images.
 **Rotate** | Rotates pages in your document.
 **Protect** | Protects or Unlocks your document with given password.
-**Validation** | Validate your document for PdfA compliance.
+**Validation** | Validate your document for PDF/A compliance.
 **Repair** | Repairs your document.
 
 
