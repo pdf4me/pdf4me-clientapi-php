@@ -1,6 +1,6 @@
 ﻿The Pdf4me Client API is a PHP package which connects to its highly scalable SaaS cloud service with many functionalities 
 to solve your document and PDF requirements. The SaaS API provides expert functionality to convert, optimize, compress, 
-produce, merge, split, ocr, enrich, archive, print documents and PDF's.
+produce, merge, split, ocr, enrich, archive, rotate, protect, validate, repair, print documents and PDF's.
 
 Feature | Description 
 ------------ | ------------- 
@@ -12,6 +12,10 @@ Feature | Description
 **Create Pdf/A** | Create a archive conform PDF/A including xmp Metadata.
 **Convert to PDF** | Convert your documents from any format to a proper PDF document.
 **Stamp** | Stamp your document with text or images.
+**Rotate** | Rotates pages in your document.
+**Protect** | Protects or Unlocks your document with given password.
+**Validation** | Validate your document for PdfA compliance.
+**Repair** | Repairs your document.
 
 
 ## Installation
