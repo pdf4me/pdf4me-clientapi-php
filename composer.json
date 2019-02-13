@@ -1,7 +1,7 @@
 {
   "name": "pdf4me/pdf4me_api_client_php",
   "description": "Api wrapper pdf4me",
-  "homepage": "https://github.com/pdf4me/pdf4me-clientapi-php",
+  "homepage": "https://portal.pdf4me.com/",
   "minimum-stability": "dev",
   "require": {
     "php": ">=5.5.0",
