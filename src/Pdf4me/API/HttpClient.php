@@ -89,7 +89,7 @@ class HttpClient
             $this->guzzle = $guzzle;
         }
 
-        $this->hostname  = ($hostname=='')?"https://api-dev.pdf4me.com":$hostname;
+        $this->hostname  = ($hostname=='')?"https://api.pdf4me.com":$hostname;
         $this->apiUrl    = "$this->hostname/"; 
         $this->debug      = new Debug();
      
