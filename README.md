@@ -20,7 +20,7 @@ Feature | Description
 
 ## Installation
 
-The Pdf4me PHP API client can be installed using [Composer](https://packagist.org/packages/pdf4me/pdf4me_api_client_php).
+The Pdf4me PHP API client can be installed using [Composer](https://getcomposer.org/).
 
 ### Composer
 
