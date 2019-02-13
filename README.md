@@ -61,3 +61,8 @@ $pdfMerge = $client->pdf4me()->merge([
 
 print_r($pdfMerge);
 ```
+
+<a name="documentation-for-api-endpoints"></a>
+## Documentation for API Endpoints
+
+The Api Documentation can be found on our developers page [https://developer.pdf4me.com](https://developer.pdf4me.com).
