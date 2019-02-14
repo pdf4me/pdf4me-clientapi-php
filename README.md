@@ -29,10 +29,9 @@ To install run `composer require pdf4me/pdf4me_api_client_php:"dev-master"`
 
 ## Getting Started
 
-To get started get a Token by dropping us an email (support-dev@pdf4me.com).
+To get started get a Token by dropping us an [email](support-dev@pdf4me.com) or registering in our [portal](https://portal.pdf4me.com/).
 
-The Token is required to Authenticate. The Pdf4me Client Api provides you already with the 
-necessary implementation. You need only to get an instance for the Pdf4meClient as shown in the sample below.
+The Token is required for Authentication. The Pdf4me Client Api provides you already with the necessary implementation. You need only to get an instance for the Pdf4meClient as shown in the sample below.
 
 ``` php
 // load Composer
@@ -40,7 +39,7 @@ require 'vendor/autoload.php';
 
 use Pdf4me\API\HttpClient as pdf4meAPI;
 
-$token = "6fghwiIBWbGkBMo1mRDMuVwkw1EPsNhjdS"; // replace this with your token
+$token = "6fg********jdS"; // replace this with your token
 $apiurl = 'https://api**.***.com';
 $client = new pdf4meAPI($token,$apiurl); // $token is compulsary and $apiurl are optional
 
@@ -62,7 +61,6 @@ $pdfMerge = $client->pdf4me()->merge([
 print_r($pdfMerge);
 ```
 
-<a name="documentation-for-api-endpoints"></a>
-## Documentation for API Endpoints
+## Documentation
 
-The Api Documentation can be found on our developers page [https://developer.pdf4me.com](https://developer.pdf4me.com).
+Please visit our [documentation](https://developer.pdf4me.com/docs/api/) for more information about all the functionalities provided and on how to use pdf4me.
