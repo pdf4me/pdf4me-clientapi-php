@@ -212,11 +212,12 @@ class Pdf4me extends ResourceAbstract {
         $route = $this->getRoute(__FUNCTION__, $params);
   
         $this->checkValidationSchemaGetData($params,$route,'post','validateDocument');
-        $res = $this->client->uploadMultipart(
+        $response = $this->client->uploadMultipart(
                         $route, $params
         ); 
-        $res_1 = serialize($res);
-        return unserialize($res_1);
+        return json_decode($response);
+        //$res_1 = serialize($res);
+        //return unserialize($res_1);
     }
 
     /**
@@ -277,9 +278,9 @@ class Pdf4me extends ResourceAbstract {
         $res = $this->client->uploadMultipart(
             $route, $params
         ); 
-        
-        $res_1 = serialize($res);
-        return unserialize($res_1);
+        return json_decode($response);
+        //$res_1 = serialize($res);
+        //return unserialize($res_1);
     }
 
 
@@ -329,8 +330,9 @@ class Pdf4me extends ResourceAbstract {
             $route, $params
         );
         // split response into seperate array
-        $splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
-        return unserialize($splitResponse);
+        //$splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
+        //return unserialize($splitResponse);
+        return json_decode($response);
     }
 
     /**
@@ -350,8 +352,9 @@ class Pdf4me extends ResourceAbstract {
               $route, $params
           );
           // split response into seperate array
-          $splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
-          return unserialize($splitResponse);
+          //$splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
+          //return unserialize($splitResponse);
+          return json_decode($response);
       }
     
     /**
@@ -511,9 +514,10 @@ class Pdf4me extends ResourceAbstract {
         $response = $this->client->uploadMultipart(
             $route, $params
         );
+        return json_decode($response);
         // split response into seperate array
-        $thumbnailResponse = explode(",",str_replace('"','',explode("]", explode("[", $response)[1])[0]));
-        return $thumbnailResponse;
+        //$thumbnailResponse = explode(",",str_replace('"','',explode("]", explode("[", $response)[1])[0]));
+        //return $thumbnailResponse;
      }
     
     /**
