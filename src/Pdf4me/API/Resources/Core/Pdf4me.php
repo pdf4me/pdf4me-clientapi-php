@@ -490,10 +490,10 @@ class Pdf4me extends ResourceAbstract {
      * return @array
      */
     public function createThumbnail(array $params) {
-      $route = $this->getRoute(__FUNCTION__, $params);
+        $route = $this->getRoute(__FUNCTION__, $params);
 
         $this->checkValidationSchemaGetData($params,$route,'post','createThumbnail');
-         return $this->client->uploadMultipart(
+            return $this->client->uploadMultipart(
                         $route, $params
         );   
     }
@@ -506,17 +506,14 @@ class Pdf4me extends ResourceAbstract {
     public function createThumbnails(array $params) {
         $route = $this->getRoute(__FUNCTION__, $params);
   
-          $this->checkValidationSchemaGetData($params,$route,'post','createThumbnails');
-           //return $this->client->uploadMultipart(
-          //                $route, $params
-          //);
+        $this->checkValidationSchemaGetData($params,$route,'post','createThumbnails');
   
-          $response = $this->client->uploadMultipart(
-              $route, $params
-          );
-          // split response into seperate array
-          $thumbnailResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
-          return unserialize($thumbnailResponse);
+        $response = $this->client->uploadMultipart(
+            $route, $params
+        );
+        // split response into seperate array
+        $thumbnailResponse = explode(",",str_replace('"','',explode("]", explode("[", $response)[1])[0]));
+        return $thumbnailResponse;
      }
     
     /**
