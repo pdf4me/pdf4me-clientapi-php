@@ -47,16 +47,19 @@ class Pdf4me extends ResourceAbstract {
         $this->setRoutes([
                         'convertFileToPdf' =>'Convert/ConvertFileToPdf',
                         'convertToPdf'=>'Convert/ConvertToPdf',
+                        'createThumbnails'=>'Image/CreateThumbnails',
                         'createThumbnail'=>'Image/CreateThumbnail',
                         'createImages'=> 'Image/CreateImages',
                         'createPdfA' => 'PdfA/CreatePdfA',
                         'pdfA'=>'PdfA/PdfA',
+                        'extractResources' => 'Extract/ExtractResources',
                         'extractPages' => 'Extract/ExtractPages',
                         'extract' => 'Extract/Extract',
                         'merge2Pdfs'=>'Merge/Merge2Pdfs',
                         'merge'=>'Merge/Merge',
                         'optimizeByProfile'=>'Optimize/OptimizeByProfile',
                         'optimize' => 'Optimize/Optimize',
+                        'splitRecurring' => 'Split/SplitRecurring',
                         'splitByPageNr' => 'Split/SplitByPageNr',
                         'split'=>'Split/Split',
                         'textStamp'=>'Stamp/TextStamp',
@@ -72,6 +75,8 @@ class Pdf4me extends ResourceAbstract {
                         'validate'=>'PdfA/Validate',
                         'repairDocument'=>'PdfA/RepairDocument',
                         'repair'=>'PdfA/Repair',
+                        'metadata'=>'PdfA/Metadata',
+                        'signPdf'=>'PdfA/SignPdf',
 
                         'createArchiveJobConfig'=>'Job/CreateArchiveJobConfig',
                         'jobConfig' => 'job/jobConfigs',
@@ -244,6 +249,39 @@ class Pdf4me extends ResourceAbstract {
         ); 
     }
 
+    /**
+     * for signPdf api
+     * @param array
+     * 
+     * return @array
+     */
+    public function signPdf(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','signPdf');
+        return $this->client->post(
+                        $route, $params
+        );   
+    }
+      
+    /**
+    * for metadata api
+    * @param array
+    * 
+    * return @array
+    */
+    public function metadata(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','metadata');
+        $res = $this->client->uploadMultipart(
+            $route, $params
+        ); 
+        
+        $res_1 = serialize($res);
+        return unserialize($res_1);
+    }
+
 
     
     /**
@@ -294,6 +332,27 @@ class Pdf4me extends ResourceAbstract {
         $splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
         return unserialize($splitResponse);
     }
+
+    /**
+     * for splitRecurring
+     * 
+     * return @array
+     */
+    public function splitRecurring(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+          $this->checkValidationSchemaGetData($params,$route,'post','splitRecurring');
+           //return $this->client->uploadMultipart(
+          //                $route, $params
+          //);
+  
+          $response = $this->client->uploadMultipart(
+              $route, $params
+          );
+          // split response into seperate array
+          $splitResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
+          return unserialize($splitResponse);
+      }
     
     /**
      * for createPdfA
@@ -438,6 +497,27 @@ class Pdf4me extends ResourceAbstract {
                         $route, $params
         );   
     }
+
+    /**
+     * for createThumbnails
+     * 
+     * return @array
+     */
+    public function createThumbnails(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+          $this->checkValidationSchemaGetData($params,$route,'post','createThumbnails');
+           //return $this->client->uploadMultipart(
+          //                $route, $params
+          //);
+  
+          $response = $this->client->uploadMultipart(
+              $route, $params
+          );
+          // split response into seperate array
+          $thumbnailResponse = serialize(explode(",",str_replace('"','', str_replace('[','', str_replace(']','', $response)))));
+          return unserialize($thumbnailResponse);
+     }
     
     /**
      * for extract api
@@ -468,6 +548,21 @@ class Pdf4me extends ResourceAbstract {
                         $route, $params
         ); 
     }
+
+        /**
+     * for extractResources api
+     * @param array
+     * 
+     * return @array
+     */
+    public function extractResources(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+          $this->checkValidationSchemaGetData($params,$route,'post','extractResources');
+          return $this->client->post(
+                          $route, $params
+          );   
+      }
     
     
     /**
