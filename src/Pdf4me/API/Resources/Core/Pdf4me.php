@@ -77,6 +77,8 @@ class Pdf4me extends ResourceAbstract {
                         'repair'=>'PdfA/Repair',
                         'metadata'=>'PdfA/Metadata',
                         'signPdf'=>'PdfA/SignPdf',
+                        'readBarcodes' => 'Barcode/ReadBarcodes',
+                        'readBarcodesByType'=>'Barcode/ReadBarcodesByType',
 
                         'createArchiveJobConfig'=>'Job/CreateArchiveJobConfig',
                         'jobConfig' => 'job/jobConfigs',
@@ -93,10 +95,40 @@ class Pdf4me extends ResourceAbstract {
                        
         ]);
     }
+   
+    /**
+     * for readBarcodes api
+     * @param array
+     * 
+     * return @array
+     */
+    public function readBarcodes(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','readBarcodes');
+        return $this->client->post(
+                        $route, $params
+        );   
+    }
+      
+    /**
+    * for readBarcodesByType
+    * @param array
+    * 
+    * return @array
+    */
+    public function readBarcodesByType(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','readBarcodesByType');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
+    }
 
        
     /**
-     * for protect api
+     * for rotate api
      * @param array
      * 
      * return @array

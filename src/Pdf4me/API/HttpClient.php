@@ -92,6 +92,7 @@ class HttpClient
         $this->hostname  = ($hostname=='')?"https://api.pdf4me.com":$hostname;
         $this->apiUrl    = "$this->hostname/"; 
         $this->debug      = new Debug();
+        $this->setUserAgent('pdf4me-php/0.1.9');
      
     }
 
@@ -176,7 +177,7 @@ class HttpClient
 //        return $this;
 //    }
     
-/**
+    /**
      * @param string $value The value to set in the header
      * @return HttpClient
      * @internal param array $headers
@@ -185,6 +186,18 @@ class HttpClient
     public function setToken($value)
     {
         $this->headers['Authorization'] = 'Basic '.$value;
+        return $this;
+    }
+
+    /**
+     * @param string $value The value to set in the header
+     * @return HttpClient
+     * @internal param array $headers
+     *
+     */
+    public function setUserAgent($value)
+    {
+        $this->headers['User-Agent'] = $value;
         return $this;
     }
 
