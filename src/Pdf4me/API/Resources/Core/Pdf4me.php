@@ -79,6 +79,7 @@ class Pdf4me extends ResourceAbstract {
                         'signPdf'=>'PdfA/SignPdf',
                         'readBarcodes' => 'Barcode/ReadBarcodes',
                         'readBarcodesByType'=>'Barcode/ReadBarcodesByType',
+                        'createBarcodeByType'=>'Barcode/CreateBarcodeByType',
 
                         'createArchiveJobConfig'=>'Job/CreateArchiveJobConfig',
                         'jobConfig' => 'job/jobConfigs',
@@ -126,6 +127,21 @@ class Pdf4me extends ResourceAbstract {
         ); 
 
         return json_decode($response, true);
+    }
+
+    /**
+    * for createBarcodeByType
+    * @param array
+    * 
+    * return @array
+    */
+    public function createBarcodeByType(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+  
+        $this->checkValidationSchemaGetData($params,$route,'post','createBarcodeByType');
+        return $this->client->uploadMultipart(
+                        $route, $params
+        ); 
     }
 
        
