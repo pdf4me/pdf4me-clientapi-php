@@ -121,9 +121,11 @@ class Pdf4me extends ResourceAbstract {
         $route = $this->getRoute(__FUNCTION__, $params);
   
         $this->checkValidationSchemaGetData($params,$route,'post','readBarcodesByType');
-        return $this->client->uploadMultipart(
+        $response = $this->client->uploadMultipart(
                         $route, $params
         ); 
+
+        return json_decode($response, true);
     }
 
        
