@@ -92,7 +92,7 @@ class HttpClient
         $this->hostname  = ($hostname=='')?"https://api.pdf4me.com":$hostname;
         $this->apiUrl    = "$this->hostname/"; 
         $this->debug      = new Debug();
-        $this->setUserAgent('pdf4me-php/1.0.0');
+        $this->setUserAgent('pdf4me-php/1.2.0');
      
     }
 
