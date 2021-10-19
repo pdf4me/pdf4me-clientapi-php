@@ -80,6 +80,9 @@ class Pdf4me extends ResourceAbstract {
                         'readBarcodes' => 'Barcode/ReadBarcodes',
                         'readBarcodesByType'=>'Barcode/ReadBarcodesByType',
                         'createBarcodeByType'=>'Barcode/CreateBarcodeByType',
+                        'createSwissQrBill'=>'SwissQR/CreateSwissQrBill',
+                        'readSwissQrCode'=>'SwissQR/ReadSwissQrCode',
+                        'createSwissQrBillList'=>'SwissQR/CreateSwissQrBillList',
 
                         'createArchiveJobConfig'=>'Job/CreateArchiveJobConfig',
                         'jobConfig' => 'job/jobConfigs',
@@ -781,7 +784,47 @@ class Pdf4me extends ResourceAbstract {
         );
     }
 
+    /**
+     * To get CreateSwissQrBill
+     * @param array
+     * 
+     * return @array
+     */
+    public function createSwissQrBill(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+        $this->checkValidationSchemaGetData($params,$route,'post','createSwissQrBill');
+        return $this->client->post(
+                       $route, $params
+       );
+    }
     
+    /**
+     * To get ReadSwissQrCode
+     * @param array
+     * 
+     * return @array
+     */
+    public function readSwissQrCode(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+        $this->checkValidationSchemaGetData($params,$route,'post','readSwissQrCode');
+        return $this->client->post(
+                       $route, $params
+       );
+    }
+    
+    /**
+    * To get CreateSwissQrBillList
+    * @param array
+    * 
+    * return @array
+    */
+    public function createSwissQrBillList(array $params) {
+        $route = $this->getRoute(__FUNCTION__, $params);
+        $this->checkValidationSchemaGetData($params,$route,'post','createSwissQrBillList');
+        return $this->client->post(
+                        $route, $params
+        );
+    }
 
     /**
      * To get jobconfig parameter

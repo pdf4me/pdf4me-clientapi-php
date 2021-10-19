@@ -65,7 +65,7 @@ print_r($pdfMerge);
 
 ## Documentation
 
-Please visit our [documentation](https://developer.pdf4me.com/docs/api/) for more information about all the functionalities provided and on how to use pdf4me.
+Please visit our [documentation](https://developer.pdf4me.com/docs/api/basic-functionality/) for more information about all the functionalities provided and on how to use pdf4me.
 
 #### PDF4me Consumer
 Those who are looking for PDF4me online tool can find it at [PDF4me.com](https://pdf4me.com/)
