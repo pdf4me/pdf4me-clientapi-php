@@ -75,7 +75,7 @@ trait PdfDataContractValidate {
  
         
         if ((isset($subparamvalue['required'])&&($subparamvalue['required'] == 1)) || ((isset($keyschema['required'])) && $keyschema['required'] == 1)) {
-            $customText = ($indexkey!='')?$indexkey.'.'.$keyschema:($subkeyparam!='')?$keyschema.'.'.$subkeyparam:$keyschema;
+            $customText = ($indexkey!='')?$indexkey.'.'.$keyschema:(($subkeyparam!='')?$keyschema.'.'.$subkeyparam:$keyschema);
             //$this->setRequiredValidateSubFeild($subparamvalue,$customText);
             throw new Pdf4meException('The '.$customText. ' cannot be none');
         }
