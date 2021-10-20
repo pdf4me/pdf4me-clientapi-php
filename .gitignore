@@ -12,3 +12,4 @@ phpunit.xml
 .project
 composer.lock
 composer.phar
+.metadata

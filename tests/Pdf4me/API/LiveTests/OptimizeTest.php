@@ -1,6 +1,8 @@
 <?php
 
-namespace Pdf4me\API\LiveTests;
+namespace test\Pdf4me\API\LiveTests;
+
+use Pdf4me\API\LiveTests\BasicTest;
 
 /**
  * Optimize test class

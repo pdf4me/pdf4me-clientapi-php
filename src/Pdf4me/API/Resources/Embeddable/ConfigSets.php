@@ -2,8 +2,8 @@
 
 namespace Pdf4me\API\Resources\Embeddable;
 
-use Pdf4me\API\Traits\Resource\Create;
-use Pdf4me\API\Traits\Resource\Update;
+// use Pdf4me\API\Traits\Resource\Create;
+// use Pdf4me\API\Traits\Resource\Update;
 
 /**
  * Class ConfigSets
@@ -11,8 +11,8 @@ use Pdf4me\API\Traits\Resource\Update;
  */
 class ConfigSets extends ResourceAbstract
 {
-    use Create;
-    use Update;
+//     use Create;
+//     use Update;
 
     /**
      * {@inheritdoc}

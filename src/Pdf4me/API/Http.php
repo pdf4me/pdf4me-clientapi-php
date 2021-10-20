@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\StreamInterface;
 use Pdf4me\API\Exceptions\ApiResponseException;
 use Pdf4me\API\Exceptions\AuthException;
+use Pdf4me\API\HttpClient;
 
 /**
  * HTTP functions via curl
@@ -54,6 +55,7 @@ class Http
             'Content-Type' => $options['contentType'],
             'User-Agent'   => 'pdf4me-php/1.2.0'
         ], $client->getHeaders());
+        
         $request = new Request(
             $options['method'],
             $client->getApiUrl() . $client->getApiBasePath() . $endPoint,
@@ -61,7 +63,7 @@ class Http
         );
         $requestOptions = [];
 
-         if (! empty($options['multipart'])) {
+        if (! empty($options['multipart'])) {
             $request['multipart'] = $options['multipart'];
         } elseif (! empty($options['postFields'])) {
             $request = $request->withBody(\GuzzleHttp\Psr7\stream_for(json_encode($options['postFields'])));

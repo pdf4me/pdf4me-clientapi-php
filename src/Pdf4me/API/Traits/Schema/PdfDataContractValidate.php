@@ -2,6 +2,7 @@
 
 namespace Pdf4me\API\Traits\Schema;
 use Pdf4me\API\Exceptions\Pdf4meException;
+use Pdf4me\API\Exceptions\MissingParametersException;
 
 
 /**

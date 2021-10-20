@@ -2,14 +2,11 @@
 
 namespace Pdf4me\API\Resources\Core;
 
-use Pdf4me\API\Exceptions\MissingParametersExceptionPdf4meException;
 use Pdf4me\API\Exceptions\ResponseException;
 use Pdf4me\API\Http;
 use Pdf4me\API\Resources\ResourceAbstract;
 use Pdf4me\API\Traits\Utility\InstantiatorTrait;
-use Pdf4me\API\Traits\Schema\PdfSchema;
 use Pdf4me\API\Traits\Schema\PdfDataContractValidate;
-use Pdf4me\API\Resources\Core\Attachments;
 
 /**
  * The Pdf class exposes key methods for document

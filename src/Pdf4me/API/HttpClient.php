@@ -9,12 +9,13 @@ namespace Pdf4me\API;
 
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
-use Pdf4me\API\Exceptions\AuthException;
 use Pdf4me\API\Middleware\RetryHandler;
 use Pdf4me\API\Resources\Core\Pdf4me;
 use Pdf4me\API\Traits\Utility\InstantiatorTrait;
 use Pdf4me\API\Utilities\Auth;
 use Pdf4me\API\Exceptions\Pdf4meException;
+use Pdf4me\API\Exceptions\ApiResponseException;
+use Pdf4me\API\Exceptions\AuthException;
 
 /**
  * Client class, base level access
@@ -294,8 +295,8 @@ class HttpClient
      *
      * @param array $options
      * @return null|\stdClass
-     * @throws \Pdf4me\API\Exceptions\AuthException
-     * @throws \Pdf4me\API\Exceptions\ApiResponseException
+     * @throws AuthException
+     * @throws ApiResponseException
      */
     public function post($endpoint, $postData = [], $options = [])
     {
