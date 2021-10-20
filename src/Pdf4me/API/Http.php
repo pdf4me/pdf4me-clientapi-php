@@ -53,7 +53,7 @@ class Http
         $headers = array_merge([
             'Accept'       => 'application/json',
             'Content-Type' => $options['contentType'],
-            'User-Agent'   => 'pdf4me-php/1.2.0'
+            'User-Agent'   => 'pdf4me-php/1.3.0'
         ], $client->getHeaders());
         
         $request = new Request(
@@ -66,7 +66,7 @@ class Http
         if (! empty($options['multipart'])) {
             $request['multipart'] = $options['multipart'];
         } elseif (! empty($options['postFields'])) {
-            $request = $request->withBody(\GuzzleHttp\Psr7\stream_for(json_encode($options['postFields'])));
+            $request = $request->withBody(\GuzzleHttp\Psr7\Utils::streamFor(json_encode($options['postFields'])));
         } elseif (! empty($options['file'])) {
             if ($options['file'] instanceof StreamInterface) {
                 $request = $request->withBody($options['file']);
