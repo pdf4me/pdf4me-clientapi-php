@@ -8,7 +8,7 @@ use Pdf4me\API\Exceptions\Pdf4meException;
  * */
 trait PdfSchema {
 
-    protected $swaggerSchemaUrl = 'https://api-dev.Pdf4me.com/swagger/v1/swagger.json';
+    protected $swaggerSchemaUrl = 'https://api.pdf4me.com/swagger/V1/swagger.json';
     protected $router_path='';
     protected $current_methodname='';
 
